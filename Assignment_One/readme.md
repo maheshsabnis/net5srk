@@ -9,7 +9,7 @@
 4. Create Required Class into Models
 	- Product : ProductId, ProductName, CategoryId, Category, Price
 	- Category : CategoryId, CategoryName, Products, Vendors
-	- Vendor : VendorId, VendorName, Categories
+	- Vendor : VendorId, VendorName, Products
 5. Add Annotation of [Key], [Required], [StringLength], [MaxLength]
 6. Add Public Class Db_Context with derived base class DBContext using Microsoft.EntityFrameworkCore
 	- Add Constroctor for DB_Context - Snippet to Create Constroctor is `ctor`
@@ -37,6 +37,7 @@
 14. Insert Data into All Tables Category, Product, and Vendor
 
 *Having doubts*
+
 15. Create Model for Vendor Product mapping table
 16. Create Service for Suppling Products by Vendor
 
