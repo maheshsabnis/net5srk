@@ -58,7 +58,7 @@ namespace Assignment_One
                 foreach (Product pro in products)
                 {
                     var result = await product.CreateAsync(pro);
-                    Console.WriteLine(JsonSerializer.Serialize(new Product { ProductId = result.ProductId, ProductName = result.ProductName, Price = result.Price, CategoryId = result.CategoryId } ));
+                    Console.WriteLine(JsonSerializer.Serialize(new Product { ProductId = result.ProductId, ProductName = result.ProductName, Price = result.Price, CategoryId = result.CategoryId }));
                 }
                 foreach (Vendor ven in vendors)
                 {
@@ -66,33 +66,16 @@ namespace Assignment_One
                     Console.WriteLine(JsonSerializer.Serialize(result));
                 }
 
+                int VendorId = 1;
+                int[] ProductIds = new int[] { 1, 3, 4, 5, 7 };
+                var result1 = await vendor.SupplyProductAsync(VendorId, ProductIds);
+                Console.WriteLine("Product Mapped with Vendor 1");
 
+                VendorId = 2;
+                ProductIds = new int[] { 2, 4, 5, 7 };
+                var result2 = await vendor.SupplyProductAsync(VendorId, ProductIds);
+                Console.WriteLine("Product Mapped with Vendor 2");
 
-                //DepartmentService dServ = new DepartmentService(ctx);
-                //var depts = await dServ.GetAsync();
-                //Console.WriteLine($"Result = {JsonSerializer.Serialize(depts)}");
-
-                //for (int i = 0; i < 10; i++)
-                //{
-                //    Console.WriteLine("Caller");
-                //}
-
-                //var dept = new Department()
-                //{
-                //    DeptNo = 30,
-                //    DeptName = "TRG",
-                //    Location = "Pune[WEST]"
-                //};
-                //var newDept = await dServ.CreateAsync(dept);
-                //Console.WriteLine($"Result After Add= {JsonSerializer.Serialize(newDept)}");
-
-                //dept = await dServ.UpdateAsync(dept.DeptNo,dept);
-
-                //Console.WriteLine($"Result After Update= {JsonSerializer.Serialize(dept)}");
-
-                //await dServ.DeleteAsync(30);
-                //depts = await dServ.GetAsync();
-                //Console.WriteLine($"Result After Delete= {JsonSerializer.Serialize(depts)}");
 
             }
             catch (Exception ex)

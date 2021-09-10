@@ -35,9 +35,8 @@
 12. Create Service for Product with all common methods with inherit generic interface
 13. Create Service for Vendor with all common methods with inherit generic interface
 14. Insert Data into All Tables Category, Product, and Vendor
-
-*Having doubts*
-
-15. Create Model for Vendor Product mapping table
-16. Create Service for Suppling Products by Vendor
+15. Create Interface with name `IVendor` into `Sevices\impl` to Implement Method `SupplyProduct`
+16. Inherits `IVendor` Interface into `Vendor` Class
+17. Add Method `SupplyProduct` into `VendorService`
+18. Insert Data into `VendorProducts` 
 

@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_EFCore_DbFirst", "CS_EFC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CS_EF_Code_First", "CS_EF_Code_First\CS_EF_Code_First.csproj", "{689717C3-713B-4065-9C5A-ED08225D3923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment_One", "Assignment_One\Assignment_One.csproj", "{25E52640-2D56-4C05-9F3C-0CB88BF31D84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment_One", "Assignment_One\Assignment_One.csproj", "{25E52640-2D56-4C05-9F3C-0CB88BF31D84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

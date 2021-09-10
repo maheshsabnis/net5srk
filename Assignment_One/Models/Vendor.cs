@@ -9,11 +9,16 @@ namespace Assignment_One.Models
 {
     public class Vendor
     {
+        public Vendor()
+        {
+            Products = new List<Product>();
+        }
+
         [Key]
         public int VendorId { get; set; }
         [Required]
         [StringLength(128)]
         public string VendorName { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

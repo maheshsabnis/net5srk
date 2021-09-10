@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Assignment_One.Services
 {
-    public partial class VendorService : IService<Vendor, int>
+    public partial class VendorService : IService<Vendor, int>, IVendor
     {
         private readonly DB_Context _Context;
         public VendorService(DB_Context context)
@@ -42,11 +42,21 @@ namespace Assignment_One.Services
             return await _Context.Vendors.FindAsync(id);
         }
 
+        public async Task<Vendor> SupplyProductAsync(int VendorId, int[] ProductIds)
+        {
+            //List<int> ProductIds = products.Select(p => p.ProductId).ToList();
+            List<Product> _products = await _Context.Products.Where(p => ProductIds.Contains(p.ProductId)).ToListAsync();
+            Vendor _vendor = await _Context.Vendors.FindAsync(VendorId);
+            _vendor.Products = _products;
+            await _Context.SaveChangesAsync();
+            return _vendor;
+        }
+
         public async Task<Vendor> UpdateAsync(int VendorId, Vendor vendor)
         {
             Vendor _vendor = await _Context.Vendors.FindAsync(VendorId);
-            _vendor.VendorId= vendor.VendorId;
-            _vendor.VendorName= vendor.VendorName;
+            _vendor.VendorId = vendor.VendorId;
+            _vendor.VendorName = vendor.VendorName;
             await _Context.SaveChangesAsync();
             return _vendor;
         }

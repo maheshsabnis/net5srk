@@ -9,6 +9,7 @@ namespace Assignment_One.Models
 {
     public class Product
     {
+       
         [Key]
         public int ProductId { get; set; }
         [Required]
@@ -17,6 +18,6 @@ namespace Assignment_One.Models
         public int CategoryId { get; set; }
         public Category category { get; set; }
         public int Price { get; set; }
-        public IEnumerable<Vendor> Vendors { get; set; }
+        public ICollection<Vendor> Vendors { get; set; }
     }
 }
