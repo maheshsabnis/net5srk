@@ -240,7 +240,7 @@ EF COre 5.0 Many-to-Many Relationships
 		- Hints: 
 			- STore Policies for Role in Database
 			- STore then in json file and load it using File MIddleware
-3. Modify the Exception Filter to Log the Requests in the Database in LogTable. This table will have following columns 
+3. Modify the Exception Filter to Log the Requests in the Database in LogTable. This table will have following columns  (Today)
 	- LogId
 	- CurrentLoginName
 	- RequestDateTime
