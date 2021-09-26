@@ -22,17 +22,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment_One", "Assignmen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_WebApp", "Core_WebApp\Core_WebApp.csproj", "{DEB92523-DFE2-4E2C-8EE4-EAEB1C8678D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.DataAccess", "Core.DataAccess\Core.DataAccess.csproj", "{01723488-75D1-4896-A8BE-B5606418A84B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignement.DataAccess", "Assignement.DataAccess\Assignement.DataAccess.csproj", "{8ABD71F0-98FF-40BB-9ACA-AFE057D2E6E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignement.DataAccess", "Assignement.DataAccess\Assignement.DataAccess.csproj", "{8ABD71F0-98FF-40BB-9ACA-AFE057D2E6E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment_Two", "Assignment_Two\Assignment_Two.csproj", "{070EFB35-EF28-426C-87C0-8DD82B0C46E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment_Two", "Assignment_Two\Assignment_Two.csproj", "{070EFB35-EF28-426C-87C0-8DD82B0C46E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_API", "Core_API\Core_API.csproj", "{F27DB6F2-F060-49AF-8BE1-B01828B88EC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core_WebApp", "Core_WebApp\Core_WebApp.csproj", "{DEB92523-DFE2-4E2C-8EE4-EAEB1C8678D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assignment_API", "Assignment_API\Assignment_API.csproj", "{94BCEB30-8633-42EE-8C6A-A13F8008C384}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.DataAccess", "Core.DataAccess\Core.DataAccess.csproj", "{01723488-75D1-4896-A8BE-B5606418A84B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core_API", "Core_API\Core_API.csproj", "{F27DB6F2-F060-49AF-8BE1-B01828B88EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.DataAccess", "Core.DataAccess\Core.DataAccess.csproj", "{696E7C92-5AB7-4557-8382-7FF654EF1882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,10 +66,6 @@ Global
 		{DEB92523-DFE2-4E2C-8EE4-EAEB1C8678D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEB92523-DFE2-4E2C-8EE4-EAEB1C8678D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEB92523-DFE2-4E2C-8EE4-EAEB1C8678D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01723488-75D1-4896-A8BE-B5606418A84B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01723488-75D1-4896-A8BE-B5606418A84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01723488-75D1-4896-A8BE-B5606418A84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01723488-75D1-4896-A8BE-B5606418A84B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8ABD71F0-98FF-40BB-9ACA-AFE057D2E6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8ABD71F0-98FF-40BB-9ACA-AFE057D2E6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ABD71F0-98FF-40BB-9ACA-AFE057D2E6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,6 +78,14 @@ Global
 		{F27DB6F2-F060-49AF-8BE1-B01828B88EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F27DB6F2-F060-49AF-8BE1-B01828B88EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F27DB6F2-F060-49AF-8BE1-B01828B88EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94BCEB30-8633-42EE-8C6A-A13F8008C384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BCEB30-8633-42EE-8C6A-A13F8008C384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BCEB30-8633-42EE-8C6A-A13F8008C384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BCEB30-8633-42EE-8C6A-A13F8008C384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696E7C92-5AB7-4557-8382-7FF654EF1882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696E7C92-5AB7-4557-8382-7FF654EF1882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696E7C92-5AB7-4557-8382-7FF654EF1882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696E7C92-5AB7-4557-8382-7FF654EF1882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Assignement.DataAccess.Services
 {
-    public class EmployeeService : IService<Employee, int>
-    {
+	public class EmployeeService : IEmployee
+	{
 
-        private readonly AssTwoContext ctx;
-        public EmployeeService(AssTwoContext ctx)
-        {
-            this.ctx = ctx;
-        }
+		private readonly AssTwoContext ctx;
+		public EmployeeService(AssTwoContext ctx)
+		{
+			this.ctx = ctx;
+		}
 		public async Task<Employee> CreateAsync(Employee entity)
 		{
 			var res = await ctx.Employees.AddAsync(entity);
@@ -33,12 +33,38 @@ namespace Assignement.DataAccess.Services
 
 		public async Task<IEnumerable<Employee>> GetAsync()
 		{
-			return await ctx.Employees.Include(d => d.Dept).ToListAsync();
-		}
+            return await ctx.Employees.Include(d => d.Dept).ToListAsync();
+            //return await ctx.Employees.ToListAsync();
+        }
 
 		public async Task<Employee> GetAsync(int id)
 		{
 			return await ctx.Employees.FindAsync(id);
+		}
+
+		public async Task<IEnumerable<Employee>> GetDeptWiseEmpAsync(string DeptName)
+		{
+			var emps = await ctx.Employees.Include(d => d.Dept).Where(e => e.Dept.DeptName == DeptName).ToListAsync();
+
+			if (!Equals(emps, null) && emps.Count > 0)
+			{
+				var resp = emps.Select(e => new Employee
+				{
+					EmpId = e.EmpId,
+					EmpName = e.EmpName,
+					Salary = e.Salary,
+					DeptId = e.DeptId,
+					Dept = new Department
+					{
+						DeptId = e.Dept.DeptId,
+						DeptName = e.Dept.DeptName,
+						Location = e.Dept.Location,
+						Capacity = e.Dept.Capacity
+					}
+				});
+				return resp;
+			}
+			return emps;
 		}
 
 		public async Task<Employee> UpdateAsync(int id, Employee entity)
