@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -67,6 +69,19 @@ namespace Assignment_API
             app.UseHttpsRedirection();
 
             app.UseCors("corspolicies");
+
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+
+                // set the file Provider Physical Path
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"Documents")),
+                // Configure the Path for the Directory in Http Request Pipeline
+                // All file contained in Http Message will be put in this folder 
+                RequestPath = new Microsoft.AspNetCore.Http.PathString("/Documents")
+            });
+
 
             app.UseRouting();
 
