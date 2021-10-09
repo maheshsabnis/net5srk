@@ -256,6 +256,83 @@ EF COre 5.0 Many-to-Many Relationships
 	- OpenAPI 3.0
 
 - Using API for File Operations
+
+- Custom Middlewares
+	- Rules for Custom Middlewares
+		- The Middleware must be planned carefully for Request processing i.e. plan for the logic
+		- Do not declare heavy objects in Middleware (IMP)
+		- Make sure that the Middleware does not unnecessarily perform File Operations, instead create a custom File Middleware
+		- Avoid Complex DB Operations and External Calls
+	- Process of Middleware
+		- Class MUST be constructor injected with RequestDelegate delegate
+			- RequestDelegate: is a mechansim to invoke the custom code or milldeware logic in Http Request Pipeline when the condition is match
+				- public delegate Task RequestDelegate(HttpContext context);
+			- The class MUST contain 'InvokeAsync(HttpContext )' method	that contains logic for Middleware
+		- This class must be Registered as Middleware by creating an Extension Method class.
+			- This class MUST be static
+			- The Method MUST be static
+				- THis method will be an Extension method for IApplicationBuilder interface
+				- THis method will register the Custom Middleware Logic class in Http Pipeline using the
+					- UseMiddleware<T>(); 
+						- T is the Custom Middleware Logic class
+
+- JSON WEB Tokens	
+	- Headers
+		- Encyrption Algorithm
+		- Set the Integrity Of The Communication
+	- Payload
+		- The Identity Data Exchanged between Client App and REST API aka Claim
+			- USerName OR Role, UserName and Role , Any custom Identity Value for Unique identification of User
+	- Signeture
+		- A Unique Verifier Value for the Token used for Token Verification
+
+		---Header
+			- Decrypt aka Decode
+				- Payload
+					- Payload Verification
+				- SIgneture
+					- Payload and Signeture is verified Parallely 
+	- To generate Token install following packages along with Identity Packages
+		- Microsoft.AspNetCore.Authentication.JwtBearer
+		- System.IdentityModel.Tokens.Jwt
+
+
+- STrategies of Deploying the Application on Cloud (Azure)
+	- Lift and Shift, Recommended for Production (Dev Can do this Directly)
+		- Cloud provides server for Hosting Application 
+		- Not Considerable Code Changes are needed
+		- Transfer Database from On-Premises to Cloud
+		- Update the Connection String in Application
+		- Test App on Premises for Database Access
+		- Deploy app on Cloud
+		- Low CapEx and Controlled OpxEx
+	 
+	- Create a VM on Server (Developer and the Cloud Infra Professional)
+		- Configure Database VM
+		- Configure App Server VM
+		- Create a Private Network Between DB VM and App VM
+			- Virtual Private Network with Private Endpoints
+		- CapEx for Creating and Managing VMs MUST be planned and COntrolled OpEx
+- Advantages of CLoud (Azure) Deployment
+	- Scalability
+	- Availability
+	- Azure AD Integration
+
+
+- Publishing ASP.NET Core Apps
+	- On-Premises
+		- Local IIS
+			- Separate DB Configuration 
+				- The DB Must be accessible to Dotnet Exe Process and ASP.NET Core Hosting Module
+		- Docker on RUn the Image for Linux
+			- Challanges
+				- Database Condifuration
+					- We cannot have Database Images
+			- Recommended to have database on Cloud
+			- Else USe Networking to access database on-Premise
+	- Deploy App on Cloud
+		- Deploy as API App
+		- Create Docker Image and Push it on Docker Registry and then Deploy Web App
 #  Assignments
 	
 # Day 1: Date: 04-09-2021

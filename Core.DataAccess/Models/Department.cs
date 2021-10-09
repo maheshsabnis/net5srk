@@ -12,6 +12,7 @@ namespace Core.DataAccess.Models
             Employees = new HashSet<Employee>();
         }
         [Required(ErrorMessage ="DeptNo is Must")]
+        
        // [NumericNonNegative(ErrorMessage = "DeptNo cannot be -Ve")]
         public int DeptNo { get; set; }
         [Required(ErrorMessage = "DeptName is Must")]

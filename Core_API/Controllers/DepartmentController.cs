@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Core.DataAccess.Models;
 using Core.DataAccess.Services;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Core_API.Controllers
 {
@@ -14,6 +15,8 @@ namespace Core_API.Controllers
 	/// The ROuteAttrinbute, that will be used by the Endpoint Mapper to 
 	/// Map the Current HTTP Request with the COntroller class
 	/// </summary>
+	/// 
+	[Authorize]
 	[Route("api/[controller]")]
 	// Used to Map the Incomming HTTP Request to Corresponding method and
 	// IMP***, used to read the Data from HTTP Request Body to the CLR Object
@@ -53,8 +56,8 @@ namespace Core_API.Controllers
 		[HttpPost("/department/create")]
 		public async Task<IActionResult> PostAsync(Department dept)
 		{
-			try
-			{
+			//try
+			//{
 				if (ModelState.IsValid)
 				{
 					if (dept.DeptNo < 0) throw new Exception("Value supplied for DeptNo in invalid");
@@ -62,11 +65,11 @@ namespace Core_API.Controllers
 					return Ok(res);
 				}
 				return BadRequest(ModelState);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex.Message);
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	return BadRequest(ex.Message);
+			//}
 		}
 		[HttpPut("/department/update/{id}")]
 		public async Task<IActionResult> PutAsync(int id, Department dept)

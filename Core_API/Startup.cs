@@ -16,6 +16,12 @@ using Core.DataAccess.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Core_API.CustomMiddleware;
+using Core_API.IdentityModels;
+using Core_API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace Core_API
 {
@@ -37,6 +43,44 @@ namespace Core_API
 				options.UseSqlServer(Configuration.GetConnectionString("AppConnectionString"));
 			});
 
+			services.AddDbContext<JwtSecurityDbContext>(options =>
+			{
+				options.UseSqlServer(Configuration.GetConnectionString("SecurityString"));
+			});
+
+
+
+
+
+			var sign = Convert.FromBase64String(Configuration["JWTSettings:SecretKey"]);
+			// definign AuthenticationService that will resolve
+			// UserManager and SignInManager
+			services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<JwtSecurityDbContext>();
+
+
+			services.AddScoped<JWTAuthService>();
+			// Add the Authentication Service that will be
+			// Responsible for the Token Verification
+			// THis will be executed by Authentication and Authorization Middleware
+			services.AddAuthentication(options=> {
+				options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+			})
+				.AddJwtBearer(options=> {
+					// verify and validate the token
+					options.SaveToken = true; // Token will be saved in Host Process
+					options.RequireHttpsMetadata = false; // No Https (True for Production)
+														  // uses the Token Validation Parameters so that
+														  // the host will validate the token
+					options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+					{
+						ValidateIssuerSigningKey = true, // validate the Sign
+						IssuerSigningKey =new SymmetricSecurityKey(sign),
+						ValidateIssuer = false,
+						ValidateAudience =false
+					};
+				});
+
 			services.AddScoped<IService<Department,int>, DepartmentService>();
 			services.AddScoped<IService<Employee,int>,EmployeeService>();
 
@@ -46,6 +90,9 @@ namespace Core_API
 					policy.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
 				});
 			});
+
+
+
 
 
 			// the method that will be used for the API Request Processing
@@ -86,22 +133,27 @@ namespace Core_API
 			app.UseStaticFiles();
 			// Configure the Static File Path to the Http Request Pipeline so that
 			// it can be used for File Read/Write Operations
-			app.UseStaticFiles(new StaticFileOptions() { 
+			//app.UseStaticFiles(new StaticFileOptions() { 
 			
-				// set the file Provider Physical Path
-			  FileProvider = new PhysicalFileProvider(
-				    // Map the Current Hosting Environment to Access the
-					// Storage Directory
-				    Path.Combine(Directory.GetCurrentDirectory(), @"Storage")),
-				// Configure the Path for the Directory in Http Request Pipeline
-				// All file contained in Http Message will be put in this folder 
-			        RequestPath = new Microsoft.AspNetCore.Http.PathString("/Storage")
-			});
+			//	// set the file Provider Physical Path
+			//  FileProvider = new PhysicalFileProvider(
+			//	    // Map the Current Hosting Environment to Access the
+			//		// Storage Directory
+			//	    Path.Combine(Directory.GetCurrentDirectory(), @"Storage")),
+			//	// Configure the Path for the Directory in Http Request Pipeline
+			//	// All file contained in Http Message will be put in this folder 
+			//        RequestPath = new Microsoft.AspNetCore.Http.PathString("/Storage")
+			//});
 
 
 			app.UseRouting();
-
+			app.UseAuthentication(); // Mandatory for Tokens 
 			app.UseAuthorization();
+
+			//Register the Custom MIddleware
+			app.UseErrorMiddleware();
+
+
 			// Map the request to API Request Processing
 			app.UseEndpoints(endpoints =>
 			{
