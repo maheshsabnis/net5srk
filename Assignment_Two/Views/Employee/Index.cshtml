@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Assignement.DataAccess.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h5>List of Employee</h5>
+    </div>
+    <div class="col-md-6">
+            <a asp-action="Create" class="btn btn-outline-primary float-right">Create New</a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dept.DeptName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmpId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmpId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
